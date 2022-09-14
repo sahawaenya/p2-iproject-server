@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         as: "Doctor",
       });
       MedicalRecord.belongsTo(models.Disease, { foreignKey: "DiseaseId" });
-      MedicalRecord.hasMany(models.SymptomRecord);
+      MedicalRecord.hasMany(models.SymptomRecord, { as: "FullSymptoms" });
+      MedicalRecord.hasMany(models.SymptomRecord, { as: "CheckSymptoms" });
     }
   }
   MedicalRecord.init(
