@@ -23,6 +23,10 @@ module.exports = {
       role: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: "Patient",
+      },
+      imageUrl: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

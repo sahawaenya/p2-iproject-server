@@ -1,0 +1,347 @@
+[
+  {
+    "code": "A01",
+    "name": "Typhoid and paratyphoid fevers",
+    "description": null
+  },
+  {
+    "code": "A01.0",
+    "name": "Typhoid fever",
+    "description": "Infection due to Salmonella typhi\r\n"
+  },
+  {
+    "code": "A01.1",
+    "name": "Paratyphoid fever A",
+    "description": null
+  },
+  {
+    "code": "A01.2",
+    "name": "Paratyphoid fever B",
+    "description": null
+  },
+  {
+    "code": "A01.3",
+    "name": "Paratyphoid fever C",
+    "description": null
+  },
+  {
+    "code": "A01.4",
+    "name": "Paratyphoid fever, unspecified",
+    "description": "Infection due to Salmonella paratyphi NOS\r\n"
+  },
+  {
+    "code": "A25",
+    "name": "Rat-bite fevers",
+    "description": null
+  },
+  {
+    "code": "A25.9",
+    "name": "Rat-bite fever, unspecified",
+    "description": null
+  },
+  {
+    "code": "A38",
+    "name": "Scarlet fever",
+    "description": "Scarlatina\r\nExcludes: streptococcal sore throat (J02.0)\r\n"
+  },
+  {
+    "code": "A48.2",
+    "name": "Nonpneumonic Legionnaires' disease [Pontiac fever]",
+    "description": null
+  },
+  {
+    "code": "A48.4",
+    "name": "Brazilian purpuric fever",
+    "description": "Systemic Haemophilus aegyptius infection\r\n"
+  },
+  {
+    "code": "A68",
+    "name": "Relapsing fevers",
+    "description": "Includes: recurrent fever\r\nExcludes: Lyme disease (A69.2)\r\n"
+  },
+  {
+    "code": "A68.0",
+    "name": "Louse-borne relapsing fever",
+    "description": "Relapsing fever due to Borrelia recurrentis\r\n"
+  },
+  {
+    "code": "A68.1",
+    "name": "Tick-borne relapsing fever",
+    "description": "Relapsing fever due to any Borrelia species other than Borrelia recurrentis\r\n"
+  },
+  {
+    "code": "A68.9",
+    "name": "Relapsing fever, unspecified",
+    "description": null
+  },
+  {
+    "code": "A75",
+    "name": "Typhus fever",
+    "description": "Excludes: rickettsiosis due to Ehrlichia sennetsu (A79.8)\r\n"
+  },
+  {
+    "code": "A75.0",
+    "name": "Epidemic louse-borne typhus fever due to Rickettsia prowazekii",
+    "description": "Classical typhus (fever)\r\nEpidemic (louse-borne) typhus\r\n"
+  },
+  {
+    "code": "A75.2",
+    "name": "Typhus fever due to Rickettsia typhi",
+    "description": "Murine (flea-borne) typhus\r\n"
+  },
+  {
+    "code": "A75.3",
+    "name": "Typhus fever due to Rickettsia tsutsugamushi",
+    "description": "Scrub (mite-borne) typhus\r\nTsutsugamushi fever\r\n"
+  },
+  {
+    "code": "A75.9",
+    "name": "Typhus fever, unspecified",
+    "description": "Typhus (fever) NOS\r\n"
+  },
+  {
+    "code": "A77",
+    "name": "Spotted fever [tick-borne rickettsioses]",
+    "description": null
+  },
+  {
+    "code": "A77.0",
+    "name": "Spotted fever due to Rickettsia rickettsii",
+    "description": "Rocky Mountain spotted fever\r\nSao Paulo fever\r\n"
+  },
+  {
+    "code": "A77.1",
+    "name": "Spotted fever due to Rickettsia conorii",
+    "description": "African tick typhus\r\nBoutonneuse fever\r\nIndia tick typhus\r\nKenya tick typhus\r\nMarseilles fever\r\nMediterranean tick fever\r\n"
+  },
+  {
+    "code": "A77.2",
+    "name": "Spotted fever due to Rickettsia sibirica",
+    "description": "North Asian tick fever\r\nSiberian tick typhus\r\n"
+  },
+  {
+    "code": "A77.3",
+    "name": "Spotted fever due to Rickettsia australis",
+    "description": "Queensland tick typhus\r\n"
+  },
+  {
+    "code": "A77.8",
+    "name": "Other spotted fevers",
+    "description": null
+  },
+  {
+    "code": "A77.9",
+    "name": "Spotted fever, unspecified",
+    "description": "Tick-borne typhus NOS\r\n"
+  },
+  {
+    "code": "A78",
+    "name": "Q fever",
+    "description": "Infection due to Coxiella burnetii\r\nNine Mile fever\r\nQuadrilateral fever\r\n"
+  },
+  {
+    "code": "A79.0",
+    "name": "Trench fever",
+    "description": "Quintan fever\r\nWolhynian fever\r\n"
+  },
+  {
+    "code": "A88.0",
+    "name": "Enteroviral exanthematous fever [Boston exanthem]",
+    "description": null
+  },
+  {
+    "code": "A90",
+    "name": "Dengue fever [classical dengue]",
+    "description": "Excludes: dengue haemorrhagic fever (A91)\r\n"
+  },
+  {
+    "code": "A91",
+    "name": "Dengue haemorrhagic fever",
+    "description": "\r\n"
+  },
+  {
+    "code": "A92",
+    "name": "Other mosquito-borne viral fevers",
+    "description": "Excludes: Ross River disease (B33.1)\r\n"
+  },
+  {
+    "code": "A92.1",
+    "name": "O'nyong-nyong fever",
+    "description": null
+  },
+  {
+    "code": "A92.2",
+    "name": "Venezuelan equine fever",
+    "description": "Venezuelan equine:\r\n- encephalitis\r\n- encephalomyelitis virus disease\r\n"
+  },
+  {
+    "code": "A92.4",
+    "name": "Rift Valley fever",
+    "description": null
+  },
+  {
+    "code": "A92.8",
+    "name": "Other specified mosquito-borne viral fevers",
+    "description": null
+  },
+  {
+    "code": "A92.9",
+    "name": "Mosquito-borne viral fever, unspecified",
+    "description": null
+  },
+  {
+    "code": "A93",
+    "name": "Other arthropod-borne viral fevers, not elsewhere classified",
+    "description": null
+  },
+  {
+    "code": "A93.1",
+    "name": "Sandfly fever",
+    "description": "Pappataci fever\r\nPhlebotomus fever\r\n"
+  },
+  {
+    "code": "A93.2",
+    "name": "Colorado tick fever",
+    "description": null
+  },
+  {
+    "code": "A93.8",
+    "name": "Other specified arthropod-borne viral fevers",
+    "description": "Piry virus disease\r\nVesicular stomatitis virus disease [Indiana fever]\r\n"
+  },
+  {
+    "code": "A94",
+    "name": "Unspecified arthropod-borne viral fever",
+    "description": "Arboviral fever NOS\r\nArbovirus infection NOS\r\n"
+  },
+  {
+    "code": "A95",
+    "name": "Yellow fever",
+    "description": null
+  },
+  {
+    "code": "A95.0",
+    "name": "Sylvatic yellow fever",
+    "description": "Jungle yellow fever\r\n"
+  },
+  {
+    "code": "A95.1",
+    "name": "Urban yellow fever",
+    "description": null
+  },
+  {
+    "code": "A95.9",
+    "name": "Yellow fever, unspecified",
+    "description": null
+  },
+  {
+    "code": "A96",
+    "name": "Arenaviral haemorrhagic fever",
+    "description": null
+  },
+  {
+    "code": "A96.0",
+    "name": "Junin haemorrhagic fever",
+    "description": "Argentinian haemorrhagic fever\r\n"
+  },
+  {
+    "code": "A96.1",
+    "name": "Machupo haemorrhagic fever",
+    "description": "Bolivian haemorrhagic fever\r\n"
+  },
+  {
+    "code": "A96.2",
+    "name": "Lassa fever",
+    "description": null
+  },
+  {
+    "code": "A96.8",
+    "name": "Other arenaviral haemorrhagic fevers",
+    "description": null
+  },
+  {
+    "code": "A96.9",
+    "name": "Arenaviral haemorrhagic fever, unspecified",
+    "description": null
+  },
+  {
+    "code": "A98",
+    "name": "Other viral haemorrhagic fevers, not elsewhere classified",
+    "description": "Excludes: chikungunya haemorrhagic fever (A92.0)\r\ndengue haemorrhagic fever (A91)\r\n"
+  },
+  {
+    "code": "A98.0",
+    "name": "Crimean-Congo haemorrhagic fever",
+    "description": "Central Asian haemorrhagic fever\r\n"
+  },
+  {
+    "code": "A98.1",
+    "name": "Omsk haemorrhagic fever",
+    "description": null
+  },
+  {
+    "code": "A98.5",
+    "name": "Haemorrhagic fever with renal syndrome",
+    "description": "Haemorrhagic fever:\r\n- epidemic\r\n- Korean\r\n- Russian\r\nHantaan virus disease\r\nNephropathia epidemica\r\nHantavirus disease with renal manifestations\r\nExcludes:hantavirus (cardio)-pulmonary syndrome (B33.4+, J17.1*)"
+  },
+  {
+    "code": "A98.8",
+    "name": "Other specified viral haemorrhagic fevers",
+    "description": null
+  },
+  {
+    "code": "A99",
+    "name": "Unspecified viral haemorrhagic fever",
+    "description": null
+  },
+  {
+    "code": "I00",
+    "name": "Rheumatic fever without mention of heart involvement",
+    "description": "Arthritis, rheumatic, acute or subacute\r\n"
+  },
+  {
+    "code": "I01",
+    "name": "Rheumatic fever with heart involvement",
+    "description": "Excludes: chronic diseases of rheumatic origin (I05-I09) unless rheumatic fever is also present or there is evidence of recrudescence or activity of the rheumatic process. In cases where there is doubt as to rheumatic activity at the time of death refer to the mortality coding rules and guidelines in Volume 2.\r\n"
+  },
+  {
+    "code": "L54.0",
+    "name": "Erythema marginatum in acute rheumatic fever (I00+)",
+    "description": null
+  },
+  {
+    "code": "R50",
+    "name": "Fever of other and unknown origin",
+    "description": "Excludes: fever of unknown origin (during)(in):\r\n- labour (O75.2)\r\n- newborn (P81.9)\r\npuerperal pyrexia NOS (O86.4)"
+  },
+  {
+    "code": "R50.0",
+    "name": "Fever with chills",
+    "description": "Fever with rigors\r\n"
+  },
+  {
+    "code": "R50.1",
+    "name": "Persistent fever",
+    "description": null
+  },
+  {
+    "code": "R50.2",
+    "name": "Drug-induced fever",
+    "description": "Use additional external cause code (Chapter XX), if desired, to identify drug."
+  },
+  {
+    "code": "R50.8",
+    "name": "Other specified fever",
+    "description": "Fever with chills/nFever with rigors /nPersistent fever"
+  },
+  {
+    "code": "R50.9",
+    "name": "Fever, unspecified",
+    "description": "Hyperpyrexia NOS\r\nPyrexia NOS\r\nExcludes: malignant hyperthermia due to anaesthesia (T88.3)\r\n"
+  },
+  {
+    "code": "Z24.3",
+    "name": "Need for immunization against yellow fever",
+    "description": null
+  }
+]
