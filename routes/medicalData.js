@@ -8,5 +8,7 @@ routes.post("/symptomcheck", Controller.getSymptRecordRank);
 routes.post("/symptoms", Controller.getSymptoms);
 routes.post("/disease", Controller.getDisease);
 routes.get("/registereddiseases", Controller.registeredDiseases);
+routes.post("/gsearch", Controller.googleSearch);
+routes.get("/numberdata", Controller.countData);
 
 module.exports = routes;

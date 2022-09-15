@@ -12,6 +12,46 @@ const { Op } = require("sequelize");
 const loopdata = require("../helpers/loopInsertDiseases");
 
 class Controller {
+  static async countData(req, res) {
+    try {
+      const dataMedRec = await MedicalRecord.count();
+      const dataSymRec = await SymptomRecord.count();
+      const dataDisease = await Disease.count();
+      res.status(200).json({
+        MedicalRecord: dataMedRec,
+        SymptomRecord: dataSymRec,
+        Diseases: dataDisease,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async googleSearch(req, res) {
+    try {
+      let { search } = req.body;
+      search = search.split(" ").join("+");
+      console.log(search);
+      const { data } = await axios({
+        method: "get",
+        url:
+          "https://google-search3.p.rapidapi.com/api/v1/search/q=" +
+          search +
+          "&num=100&lr=lang_en&hl=en&cr=US",
+        headers: {
+          "X-User-Agent": "desktop",
+          "X-Proxy-Location": "EU",
+          "X-RapidAPI-Key":
+            "386ce05a42msh7b881f57773f9cdp1cc23cjsn1562c1932577",
+          "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
+        },
+      });
+      res.status(200).json(data.results[2].description);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static async registeredDiseases(req, res) {
     try {
       let { dataPerPage, page } = req.query;
