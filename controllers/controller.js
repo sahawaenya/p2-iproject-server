@@ -1,4 +1,5 @@
 const axios = require("axios");
+
 const {
   SymptomRecord,
   MedicalRecord,
@@ -7,8 +8,9 @@ const {
   Symptom,
   Body,
   Sign,
+  sequelize,
 } = require("../models");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const loopdata = require("../helpers/loopInsertDiseases");
 
 class Controller {
@@ -247,7 +249,7 @@ class Controller {
         include: [
           {
             model: SymptomRecord,
-            as: "CheckSymptoms",
+            as: "MatchSymptoms",
             where: { SymptomId: options },
           },
           {
@@ -275,115 +277,142 @@ class Controller {
 
   static async getSymptRecordRank(req, res) {
     try {
-      let { dataToCompare, page } = req.body;
+      // data to get
+      console.time("Exec");
+      console.timeLog("Exec");
+      console.log("Find Symptom");
+      let dataSymptoms = await Symptom.findAll({
+        order: [["id", "DESC"]],
+        // limit: 12,
+        include: [
+          {
+            model: Body,
+          },
+          {
+            model: Sign,
+          },
+        ],
+      });
+
+      dataSymptoms = dataSymptoms.map((el) => {
+        return {
+          id: el.id,
+          BodyName: el.Body.name,
+          SignName: el.Sign.name,
+        };
+      });
+      console.log(dataSymptoms.length);
+      let dataDiseases = await Disease.findAll();
+      console.log(dataDiseases.length);
+
+      console.timeLog("Exec");
+
+      let { dataToCompare, page } = req.query;
       if (!dataToCompare) dataToCompare = 100;
       if (!page) page = 1;
       const dataFrom = dataToCompare * (page - 1);
       const dataTo = +dataFrom + +dataToCompare;
-      let options = [];
-      if (req.body.search) {
-        options = req.body.search.split(",");
-      }
+      let options = req.query.search.split(",").join(' OR "SymptomId" = ');
 
-      let data = await MedicalRecord.findAndCountAll({
-        order: [["id", "DESC"]],
-        distinct: true,
-        col: "id",
-        limit: dataToCompare,
-        include: [
-          {
-            model: SymptomRecord,
-            as: "CheckSymptoms",
-            where: { SymptomId: options },
-            include: {
-              model: Symptom,
-              include: [
-                {
-                  model: Body,
-                },
-                {
-                  model: Sign,
-                },
-              ],
-            },
-          },
-          {
-            model: SymptomRecord,
-            as: "FullSymptoms",
-            include: {
-              model: Symptom,
-              include: [
-                {
-                  model: Body,
-                },
-                {
-                  model: Sign,
-                },
-              ],
-            },
-          },
-          { model: Disease },
+      console.timeLog("Exec");
+      console.log("Find Symptom Record");
+
+      let data = {};
+      data.rows = await SymptomRecord.findAll({
+        attributes: [
+          "MedicalRecordId",
+          [
+            sequelize.literal(
+              `array_agg("SymptomId") filter (WHERE "SymptomId" = ${options})`
+            ),
+            "MatchSymptoms",
+          ],
+          [
+            sequelize.fn("array_agg", sequelize.col("SymptomId")),
+            "FullSymptoms",
+          ],
+          [sequelize.fn("array_agg", sequelize.col("MedicalRecord"))],
         ],
+        // limit: 10,
+        group: ["MedicalRecordId"],
       });
+      // res.send(data);
+      // const medrec = data.map((el) => el.MedicalRecordId);
+
+      // let dataFull = await SymptomRecord.findAll({
+      //   attributes: [
+      //     "SymptonId"
+      //   ],
+      //   limit: 100,
+      //   where: { SymptomId: [71, 32] },
+      //   group: ["MedicalRecordId"],
+      // });
+
+      // let data = await MedicalRecord.findAndCountAll({
+      //   order: [["id", "DESC"]],
+      //   distinct: true,
+      //   col: "id",
+      //   limit: dataToCompare,
+      //   include: [
+      //     {
+      //       model: SymptomRecord,
+      //       required: true,
+      //       as: "MatchSymptoms",
+      //       where: { SymptomId: options },
+      //       include: {
+      //         model: Symptom,
+      //         include: [
+      //           {
+      //             model: Body,
+      //           },
+      //           {
+      //             model: Sign,
+      //           },
+      //         ],
+      //       },
+      //     },
+      // {
+      //   model: SymptomRecord,
+      //   as: "FullSymptoms",
+      //   include: {
+      //     model: Symptom,
+      //     include: [
+      //       {
+      //         model: Body,
+      //       },
+      //       {
+      //         model: Sign,
+      //       },
+      //     ],
+      //   },
+      // },
+      // { model: Disease },
+      //   ],
+      // });
+      console.log(data.rows[0]);
+      console.timeLog("Exec");
+      data.count = data.rows.length;
+      console.timeLog("Exec");
+      console.log("Find Percentage");
+
       data.rows = data.rows.map((el) => {
-        if ((el.CheckSymptoms.length / el.FullSymptoms.length) * 100 < 20) {
+        el = el.dataValues;
+        let valPercentage = el.MatchSymptoms.length;
+        if (valPercentage > el.FullSymptoms.length) {
+          valPercentage =
+            el.MatchSymptoms.length -
+            (el.MatchSymptoms.length - el.FullSymptoms.length);
+        }
+        if ((valPercentage / el.FullSymptoms.length) * 100 < 20) {
         } else {
-          let valPercentage = el.CheckSymptoms.length;
-          if (el.CheckSymptoms.length > el.FullSymptoms.length) {
-            valPercentage =
-              el.CheckSymptoms.length -
-              (el.CheckSymptoms.length - el.FullSymptoms.length);
-          }
-          const nameCheckSymptoms = el.CheckSymptoms.map((el) => {
-            return el.Symptom.Body.name + ": " + el.Symptom.Sign.name;
-          });
+          el.percentage = (valPercentage / el.FullSymptoms.length) * 100;
 
-          const nameFullSymptoms = el.FullSymptoms.map((el) => {
-            return el.Symptom.Body.name + ": " + el.Symptom.Sign.name;
-          });
-          return {
-            DiseaseId: el.DiseaseId,
-            DiseaseName: el.Disease.name,
-            DiseaseDesc: el.Disease.description,
-            SearchSymptoms: nameCheckSymptoms,
-            RecordSymptoms: nameFullSymptoms,
-            MatchSymptoms: el.CheckSymptoms.length,
-            FullSymptoms: el.FullSymptoms.length,
-            percentage: (valPercentage / el.FullSymptoms.length) * 100,
-          };
+          return el;
         }
       });
-      // remove empty array
-      data.rows = data.rows.filter((el) => {
-        return el != null;
-      });
-
-      for (const i in data.rows) {
-        let count = 0;
-        for (const j in data.rows) {
-          if (
-            data.rows[i].DiseaseId == data.rows[j].DiseaseId &&
-            data.rows[i].percentage == data.rows[j].percentage
-          )
-            count++;
-        }
-        data.rows[i].count = count;
-      }
-
-      data.rows = data.rows.reduce((acc, current) => {
-        const x = acc.find(
-          (item) =>
-            item.DiseaseId === current.DiseaseId &&
-            item.percentage === current.percentage
-        );
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, []);
-
       // desc sort
+      console.timeLog("Exec");
+      console.log("Sorting");
 
       data.rows = data.rows.sort((a, b) => {
         return a.percentage < b.percentage ? 1 : -1;
@@ -393,7 +422,60 @@ class Controller {
           return a.count < b.count ? 1 : -1;
         }
       });
+      console.timeLog("Exec");
+      console.log("Filtering Null");
+
+      data.rows = data.rows.filter((el) => el != null);
+      console.log("Counting");
+
+      // for (const i in data.rows) {
+      //   let count = 0;
+      //   for (const j in data.rows) {
+      //     if (
+      //       data.rows[i].DiseaseId == data.rows[j].DiseaseId &&
+      //       data.rows[i].percentage == data.rows[j].percentage
+      //     )
+      //       count++;
+      //   }
+      //   data.rows[i].count = count;
+      // }
+      console.timeLog("Exec");
+
+      // data.rows = data.rows.reduce((acc, current) => {
+      //   const x = acc.find(
+      //     (item) =>
+      //       item.DiseaseId === current.DiseaseId &&
+      //       item.percentage === current.percentage
+      //   );
+      //   if (!x) {
+      //     return acc.concat([current]);
+      //   } else {
+      //     return acc;
+      //   }
+      // }, []);
       data.rows = data.rows.slice(0, 20);
+
+      data.rows = data.rows.map((el) => {
+        el.SearchSymptoms = el.MatchSymptoms.map((elMatch) => {
+          let symptomsName = dataSymptoms.find(
+            (elFind) => elFind.id == elMatch
+          );
+          return `${symptomsName.BodyName.toUpperCase()}: ${symptomsName.SignName.toUpperCase()}`;
+        });
+
+        el.RecordSymptoms = el.FullSymptoms.map((elMatch) => {
+          let symptomsName = dataSymptoms.find(
+            (elFind) => elFind.id == elMatch
+          );
+          return `${symptomsName.BodyName.toUpperCase()}: ${symptomsName.SignName.toUpperCase()}`;
+        });
+        el.MatchSymptoms = el.MatchSymptoms.length;
+        el.FullSymptoms = el.FullSymptoms.length;
+        return el;
+      });
+      // remove empty array
+
+      // console.log(data);
       res.status(200).json(data);
     } catch (error) {
       console.log(error);

@@ -129,14 +129,25 @@ _200 - OK_
 
 ```json
 {
-    "count": 100000,
+    "count": 3630,
     "rows": [
         {
-            "DiseaseId": 4,
+            "DiseaseId": 54,
+            "DiseaseName": "Other viral haemorrhagic fevers, not elsewhere classified",
+            "DiseaseDesc": "Excludes: chikungunya haemorrhagic fever (A92.0)\r\ndengue haemorrhagic fever (A91)\r\n",
+            "SearchSymptoms": [
+                "mouth: Hot (More than 37° C)"
+            ],
+            "RecordSymptoms": [
+                "mouth: Hot (More than 37° C)",
+                "eye: Hot (More than 37° C)",
+                "head: Hot (More than 37° C)",
+                "finger: scratch"
+            ],
             "MatchSymptoms": 1,
             "FullSymptoms": 4,
             "percentage": 25,
-            "count": 3
+            "count": 2
         },
         ...
     ]
